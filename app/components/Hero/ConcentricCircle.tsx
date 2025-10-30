@@ -4,41 +4,39 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export default function ConcentricCircle() {
-  const circlesRef = useRef<HTMLDivElement[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const circlesRef = useRef<SVGCircleElement[]>([]);
 
-  // Store multiple refs
-  const setRef = (el: HTMLDivElement | null, index: number) => {
+  const setRef = (el: SVGCircleElement | null, index: number) => {
     if (el) circlesRef.current[index] = el;
   };
 
   useEffect(() => {
     const tl = gsap.timeline({ repeat: 0 });
-    // Sequentially scale in the circles
     circlesRef.current.forEach((circle, i) => {
       tl.fromTo(
         circle,
-        { scale: 0, opacity: 0 },
+        { scale: 0, opacity: 0, transformOrigin: "center bottom" },
         {
           scale: 1,
-          opacity: 0.2,
-          duration: 0.5,
-          delay: i * 0.2,
+          opacity: 1,
+          duration: 0.8,
+          delay: i * 0.15,
           ease: "power2.out",
         },
-        "<" // start overlapping slightly
+        "<0.1"
       );
     });
   }, []);
 
-  // Parallax effect on mouse move
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 2; // range -1 to 1
+      const x = (e.clientX / innerWidth - 0.5) * 2;
       const y = (e.clientY / innerHeight - 0.5) * 2;
 
       circlesRef.current.forEach((circle, i) => {
-        const movement = (i + 1) * 10; // deeper layers move less
+        const movement = (i + 1) * 8;
         gsap.to(circle, {
           x: x * movement,
           y: y * movement,
@@ -53,24 +51,98 @@ export default function ConcentricCircle() {
   }, []);
 
   return (
-      
-      <div className="absolute w-full h-full z-50 bottom-0 left-2 flex items-center justify-center overflow-hidden ">
-      {[...Array(5)].map((_, i) => (
-          <div
-          key={i}
-          ref={(el) => setRef(el, i)}
-          className={`
-            absolute  rounded-full border border-white/30 
-            aspect-square   mask-[linear-gradient(to_bottom,black_50%,transparent_50%)]
-            mask-no-repeat mask-size-[100%_100%]
-            ${i === 0 ? "w-xl bg-purple-400/70 " : ""}
-            ${i === 1 ? "w-2xl bg-purple-600/60" : ""}
-            ${i === 2 ? "w-3xl bg-purple-700/50" : ""}
-            ${i === 3 ? "w-4xl bg-purple-800/40" : ""}
-            ${i === 4 ? "w-5xl bg-purple-900/30" : ""}
-            `}
-            />
-        ))}
-        </div>
+    <div 
+      ref={containerRef}
+      className="absolute inset-0 flex items-end justify-center overflow-hidden pointer-events-none"
+    >
+      <svg
+        className="absolute bottom-0 left-1/2 -translate-x-1/2"
+        width="100%"
+        height="100%"
+        viewBox="0 0 1920 1080"
+        preserveAspectRatio="xMidYMax slice"
+        style={{ minHeight: '100%', minWidth: '100%' }}
+      >
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: 'rgba(110, 0, 207, 0.5)', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: 'rgba(80, 0, 150, 0.2)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: 'rgba(90, 0, 180, 0.4)', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: 'rgba(60, 0, 120, 0.15)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: 'rgba(70, 0, 150, 0.35)', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: 'rgba(50, 0, 100, 0.12)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="grad4" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: 'rgba(60, 0, 130, 0.3)', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: 'rgba(40, 0, 80, 0.1)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="grad5" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: 'rgba(50, 0, 110, 0.25)', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: 'rgba(30, 0, 60, 0.08)', stopOpacity: 1 }} />
+          </linearGradient>
+          
+          {/* Clip path to show only bottom half */}
+          <clipPath id="bottomHalf">
+            <rect x="0" y="300" width="1920" height="780" />
+          </clipPath>
+        </defs>
+
+        <g clipPath="url(#bottomHalf)">
+          {/* Circle 5 - Outermost */}
+          <circle
+            ref={(el) => setRef(el, 4)}
+            cx="960"
+            cy="1080"
+            r="750"
+            fill="url(#grad5)"
+            strokeWidth="0"
+          />
+          
+          {/* Circle 4 */}
+          <circle
+            ref={(el) => setRef(el, 3)}
+            cx="960"
+            cy="1080"
+            r="600"
+            fill="url(#grad4)"
+            strokeWidth="0"
+          />
+          
+          {/* Circle 3 */}
+          <circle
+            ref={(el) => setRef(el, 2)}
+            cx="960"
+            cy="1080"
+            r="460"
+            fill="url(#grad3)"
+            strokeWidth="0"
+          />
+          
+          {/* Circle 2 */}
+          <circle
+            ref={(el) => setRef(el, 1)}
+            cx="960"
+            cy="1080"
+            r="330"
+            fill="url(#grad2)"
+            strokeWidth="0"
+          />
+          
+          {/* Circle 1 - Innermost */}
+          <circle
+            ref={(el) => setRef(el, 0)}
+            cx="960"
+            cy="1080"
+            r="220"
+            fill="url(#grad1)"
+            strokeWidth="0"
+          />
+        </g>
+      </svg>
+    </div>
   );
 }
