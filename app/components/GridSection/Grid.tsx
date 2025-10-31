@@ -19,18 +19,21 @@ const Grid = (props: Props) => {
       <div className='grid grid-cols-1 md:hidden gap-4'>
         {gridItems.map((item, index) => (
           <div key={item.id} className='bg-[#0E0E0E] rounded-2xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-2 hover:bg-[#232323] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group cursor-pointer min-h-[180px]'>
-            <div className='flex items-center justify-center flex-1 transition-transform duration-300 group-hover:scale-110'>
+            <div className='flex items-center justify-center  transition-transform duration-300 group-hover:scale-110'>
               <Image
                 src={item.logo}
                 alt={item.name}
                 width={120}
                 height={120}
-                className='object-contain filter brightness-0 invert max-h-[100px]'
+                className={`object-contain  max-h-[100px] ${index !== 4 && 'filter brightness-0 invert'}`}
               />
             </div>
-            <p className='text-[#9D9D9D] text-xs font-medium font-poppins transition-all duration-300 group-hover:text-[#FFFFFF] group-hover:-translate-y-1 tracking-wider'>
+            {index !== 2 && (
+
+                <p className='text-[#9D9D9D] text-xs font-medium font-poppins transition-all duration-300 group-hover:text-[#FFFFFF] group-hover:-translate-y-1 tracking-wider'>
               {item.name}
             </p>
+            )}
           </div>
         ))}
       </div>
