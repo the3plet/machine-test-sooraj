@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 
 type Props = {}
@@ -13,13 +13,23 @@ const gridItems = [
 ]
 
 const Grid = (props: Props) => {
+      const [activeCard, setActiveCard] = useState<number | null>(null)
   return (
     <section className='px-6 sm:px-12 md:px-24 lg:px-40 xl:px-60 py-12 md:py-16 lg:py-20'>
       {/* Mobile: Single column stack */}
       <div className='grid grid-cols-1 md:hidden gap-4'>
         {gridItems.map((item, index) => (
-          <div key={item.id} className='bg-[#0E0E0E] rounded-2xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-2 hover:bg-[#232323] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group cursor-pointer min-h-[180px]'>
-            <div className='flex items-center justify-center  transition-transform duration-300 group-hover:scale-110'>
+           <div
+            key={item.id}
+            onClick={() => setActiveCard(item.id === activeCard ? null : item.id)}
+            className={`rounded-2xl p-6 flex flex-col items-center justify-center gap-3 min-h-[180px]
+              ${
+                activeCard === item.id
+                  ? "bg-[#232323] transition-all duration-300 ease-out scale-[1.02] -translate-y-2 group cursor-pointer"
+                  : "bg-[#0E0E0E] group"
+              } group`}
+          >
+            <div className='flex items-center justify-center  transition-transform duration-300 group-hover:scale-110 '>
               <Image
                 src={item.logo}
                 alt={item.name}

@@ -56,7 +56,7 @@ export default function ConcentricCircle() {
       className="absolute inset-0 flex items-end justify-center overflow-hidden pointer-events-none"
     >
       <svg
-        className="absolute bottom-0 top-40 left-1/2 -translate-x-1/2"
+        className="absolute bottom-10 lg:top-40 md:bottom-0 left-1/2 -translate-x-1/2"
         width="100%"
         height="100%"
         viewBox="0 0 1920 1080"
