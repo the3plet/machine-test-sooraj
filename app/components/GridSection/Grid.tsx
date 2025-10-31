@@ -49,7 +49,7 @@ const Grid = (props: Props) => {
       </div>
 
       {/* Desktop: 6 columns x 5 rows grid layout */}
-      <div className='hidden md:grid md:grid-cols-6 md:grid-rows-5 gap-1 h-[600px]'>
+      <div className='hidden md:grid md:grid-cols-6 md:grid-rows-5 gap-3 h-[600px]'>
         {/* Card 1 - Top Left (1 col, 4 rows) */}
         <div className='col-span-2 row-span-3 bg-[#0E0E0E] rounded-2xl p-6 flex flex-col items-center justify-center gap-5 transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-2 hover:bg-[#232323] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group cursor-pointer'>
           <div className='flex items-center justify-center  transition-transform duration-300 group-hover:scale-110'>
