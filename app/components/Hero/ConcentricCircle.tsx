@@ -56,7 +56,7 @@ export default function ConcentricCircle() {
       className="absolute inset-0 flex items-end justify-center overflow-hidden pointer-events-none"
     >
       <svg
-        className="absolute bottom-0 left-1/2 -translate-x-1/2"
+        className="absolute bottom-0 top-40 left-1/2 -translate-x-1/2"
         width="100%"
         height="100%"
         viewBox="0 0 1920 1080"
@@ -65,7 +65,7 @@ export default function ConcentricCircle() {
       >
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: 'rgba(110, 0, 207, 0.5)', stopOpacity: 1 }} />
+            <stop offset="0%" style={{ stopColor: 'rgba(110, 0, 207, 0.5)', stopOpacity: 1,  }} />
             <stop offset="100%" style={{ stopColor: 'rgba(80, 0, 150, 0.2)', stopOpacity: 1 }} />
           </linearGradient>
           <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -80,8 +80,8 @@ export default function ConcentricCircle() {
             <stop offset="0%" style={{ stopColor: 'rgba(60, 0, 130, 0.3)', stopOpacity: 1 }} />
             <stop offset="100%" style={{ stopColor: 'rgba(40, 0, 80, 0.1)', stopOpacity: 1 }} />
           </linearGradient>
-          <linearGradient id="grad5" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: 'rgba(50, 0, 110, 0.25)', stopOpacity: 1 }} />
+          <linearGradient id="grad5" x1="40%" y1="50%" x2="40%" y2="10%">
+            <stop offset="0%" style={{ stopColor: 'rgba(50, 0, 110, 0.09)', stopOpacity: 1 }} />
             <stop offset="100%" style={{ stopColor: 'rgba(30, 0, 60, 0.08)', stopOpacity: 1 }} />
           </linearGradient>
           
@@ -97,7 +97,7 @@ export default function ConcentricCircle() {
             ref={(el) => setRef(el, 4)}
             cx="960"
             cy="1080"
-            r="750"
+            r="850"
             fill="url(#grad5)"
             strokeWidth="0"
           />
@@ -106,8 +106,8 @@ export default function ConcentricCircle() {
           <circle
             ref={(el) => setRef(el, 3)}
             cx="960"
-            cy="1080"
-            r="600"
+            cy="1250"
+            r="720"
             fill="url(#grad4)"
             strokeWidth="0"
           />
@@ -116,8 +116,8 @@ export default function ConcentricCircle() {
           <circle
             ref={(el) => setRef(el, 2)}
             cx="960"
-            cy="1080"
-            r="460"
+            cy="1250"
+            r="620"
             fill="url(#grad3)"
             strokeWidth="0"
           />
@@ -126,8 +126,8 @@ export default function ConcentricCircle() {
           <circle
             ref={(el) => setRef(el, 1)}
             cx="960"
-            cy="1080"
-            r="330"
+            cy="1250"
+            r="520"
             fill="url(#grad2)"
             strokeWidth="0"
           />
@@ -136,8 +136,8 @@ export default function ConcentricCircle() {
           <circle
             ref={(el) => setRef(el, 0)}
             cx="960"
-            cy="1080"
-            r="220"
+            cy="1250"
+            r="420"
             fill="url(#grad1)"
             strokeWidth="0"
           />
