@@ -43,7 +43,7 @@ const Hero = (props: Props) => {
       <div className="relative z-10 flex flex-col h-full justify-center items-center text-[#FFFFFF] gap-3 sm:gap-4 md:gap-5">
         <h1
           id="entrance-animation"
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold font-poppins text-center "
+          className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-poppins text-center "
         >
           Smarter Solutions <br></br> Powered by AI
         </h1>
